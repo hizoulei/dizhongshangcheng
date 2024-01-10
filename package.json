@@ -1,6 +1,6 @@
 {
   "name": "vue-project",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -14,9 +14,16 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@vant/auto-import-resolver": "^1.0.2",
     "@vueuse/core": "^10.7.0",
+    "amfe-flexible": "^2.2.1",
+    "axios": "^1.6.3",
     "install": "^0.13.0",
+    "js-cookie": "^3.0.5",
+    "less": "^4.2.0",
     "pinia": "^2.1.7",
+    "postcss-pxtorem": "^5.1.1",
+    "vant": "^4.8.0",
     "vue": "^3.3.10",
     "vue-router": "^4.2.5"
   },
@@ -38,6 +45,7 @@
     "eslint": "^8.49.0",
     "eslint-plugin-vue": "^9.17.0",
     "jsdom": "^23.0.1",
+    "less-loader": "^7.3.0",
     "npm-run-all2": "^6.1.1",
     "prettier": "^3.0.3",
     "typescript": "~5.2.0",

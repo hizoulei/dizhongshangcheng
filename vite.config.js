@@ -20,6 +20,8 @@ import {
     VueUseComponentsResolver,
     VueUseDirectiveResolver
 } from 'unplugin-vue-components/resolvers'
+//px转rem
+import postCssPxToRem from 'postcss-pxtorem'
 // icon 插件
 import Icons from 'unplugin-icons/vite'
 // icon 自动引入解析器
@@ -34,7 +36,7 @@ import presetUno from '@unocss/preset-uno'
 import presetAttributify from '@unocss/preset-attributify'
 // Unocss 指令插件
 import transformerDirective from '@unocss/transformer-directives'
-
+import { VantResolver } from '@vant/auto-import-resolver';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
     const viteEnv = loadEnv(mode, './')
@@ -116,6 +118,7 @@ export default defineConfig(({ mode }) => {
                     }),
                     VueUseComponentsResolver(),
                     VueUseDirectiveResolver(),
+                    VantResolver(),
                     IconsResolver({
                         // icon自动引入的组件前缀 - 为了统一组件icon组件名称格式
                         prefix: 'icon',
@@ -138,7 +141,25 @@ export default defineConfig(({ mode }) => {
                 },
                 autoInstall: true
             })
-        ]
+        ],
+        css: {
+            // css预处理器
+            preprocessorOptions: {
+                less: {
+                    charset: false,
+                },
+            },
+            postcss: {
+                plugins: [
+                    postCssPxToRem({
+                        // 自适应，px>rem转换
+                        rootValue: 40,
+                        propList: ['*'], // 需要转换的属性，这里选择全部都进行转换
+                        selectorBlackList: ['norem'], // 过滤掉norem-开头的class，不进行rem转换，这个内容可以不写
+                    }),
+                ],
+            },
+        },
     }
 })
 
